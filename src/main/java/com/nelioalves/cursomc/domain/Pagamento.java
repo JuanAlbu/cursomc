@@ -58,13 +58,11 @@ public abstract class Pagamento implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pagamento pagamento = (Pagamento) o;
-        return Objects.equals(id, pagamento.id) &&
-                estado == pagamento.estado &&
-                Objects.equals(pedido, pagamento.pedido);
+        return Objects.equals(id, pagamento.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, estado, pedido);
+        return Objects.hash(id);
     }
 }

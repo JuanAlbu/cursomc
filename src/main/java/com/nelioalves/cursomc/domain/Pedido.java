@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -27,6 +29,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido(){
     }
@@ -78,20 +83,24 @@ public class Pedido implements Serializable {
         this.cliente = cliente;
     }
 
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-        return Objects.equals(id, pedido.id) &&
-                Objects.equals(instante, pedido.instante) &&
-                Objects.equals(pagamento, pedido.pagamento) &&
-                Objects.equals(enderecoDeEntrega, pedido.enderecoDeEntrega) &&
-                Objects.equals(cliente, pedido.cliente);
+        return Objects.equals(id, pedido.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instante, pagamento, enderecoDeEntrega, cliente);
+        return Objects.hash(id);
     }
 }
