@@ -3,7 +3,6 @@ package com.nelioalves.cursomc.domain;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
-import java.util.Objects;
 
 @Entity
 public class PagamentoComCartao extends Pagamento{
@@ -25,19 +24,5 @@ public class PagamentoComCartao extends Pagamento{
 
     public void setNumeroDeParcelas(Integer numeroDeParcelas) {
         this.numeroDeParcelas = numeroDeParcelas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        PagamentoComCartao that = (PagamentoComCartao) o;
-        return Objects.equals(numeroDeParcelas, that.numeroDeParcelas);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), numeroDeParcelas);
     }
 }
